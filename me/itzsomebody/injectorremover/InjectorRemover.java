@@ -222,6 +222,10 @@ public class InjectorRemover extends JFrame {
                 if (insnNode.getOpcode() == 184 && ((MethodInsnNode)insnNode).name.equalsIgnoreCase("\u0970") && ((MethodInsnNode)insnNode).desc.equalsIgnoreCase("()V")) {
                 	insnNodes.remove(insnNode);
                 }
+            }
+            if (methodNode.name.equalsIgnoreCase("onEnable") || methodNode.name.equalsIgnoreCase("onLoad")) {
+                InsnList insnNodes = methodNode.instructions;
+                AbstractInsnNode insnNode = insnNodes.get(0);
                 if (insnNode.getOpcode() == 184 && ((MethodInsnNode)insnNode).name.equalsIgnoreCase("\u0971") && ((MethodInsnNode)insnNode).desc.equalsIgnoreCase("()V")) {
                 	insnNodes.remove(insnNode);
                 }

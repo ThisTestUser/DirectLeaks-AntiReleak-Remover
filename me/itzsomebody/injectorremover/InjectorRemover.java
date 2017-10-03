@@ -248,14 +248,16 @@ public class InjectorRemover extends JFrame {
             }
         }
     	
-    	for (Iterator<FieldNode> it = classNode.fields.iterator(); it.hasNext() ;) {
-    		FieldNode fieldNode = it.next();
-    		if (fieldNode.access == 9 && fieldNode.desc.equalsIgnoreCase("I")) {
-    			it.remove();
-    		} else if (fieldNode.access == 9 && fieldNode.desc.equalsIgnoreCase("Ljava/lang/String;")) {
-    			it.remove();
-    		}
-    	}
+        if (classNode.superName.equals("org/bukkit/plugin/java/JavaPlugin") || classNode.superName.equals("net/md_5/bungee/api/plugin/Plugin")) {
+        	for (Iterator<FieldNode> it = classNode.fields.iterator(); it.hasNext() ;) {
+        		FieldNode fieldNode = it.next();
+        		if (fieldNode.access == 9 && fieldNode.desc.equalsIgnoreCase("I")) {
+        			it.remove();
+        		} else if (fieldNode.access == 9 && fieldNode.desc.equalsIgnoreCase("Ljava/lang/String;")) {
+        			it.remove();
+        		}
+        	}
+        }
     }
     
     private static void removeXORMethod(ClassNode classNode) {
